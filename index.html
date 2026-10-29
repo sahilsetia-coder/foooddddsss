@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f6f1e8">
+  <title>FreshCheck | Food Spoilage Detection</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="page-shell">
+    <header class="topbar">
+      <a class="brand" href="index.html" aria-label="FreshCheck home">
+        <span class="brand-mark" aria-hidden="true">+</span>
+        <span>fresh<span>check</span></span>
+      </a>
+      <div class="secure-note"><span class="pulse-dot" aria-hidden="true"></span> private inspection workspace</div>
+    </header>
+
+    <main>
+      <section class="intro" aria-labelledby="page-title">
+        <p class="eyebrow">Food quality intelligence / 01</p>
+        <h1 id="page-title">Know before<br><em>you serve.</em></h1>
+        <p class="intro-copy">Capture a clear photo of your food and let your Nyckel classifier flag visible spoilage indicators in seconds.</p>
+      </section>
+
+      <section class="workspace" aria-label="Food inspection workspace">
+        <div class="capture-panel panel">
+          <div class="panel-heading">
+            <div>
+              <span class="section-number">01</span>
+              <h2>Inspect an image</h2>
+            </div>
+            <span class="format-note">JPG / PNG / WEBP</span>
+          </div>
+
+          <div class="media-stage" id="mediaStage">
+            <div class="empty-state" id="emptyState">
+              <div class="empty-icon" aria-hidden="true">◌</div>
+              <p>Drop an image here<br><span>or choose how to capture one</span></p>
+            </div>
+            <img id="imagePreview" alt="Selected food preview" hidden>
+            <video id="cameraVideo" autoplay playsinline hidden></video>
+            <canvas id="captureCanvas" hidden></canvas>
+            <div class="scan-line" id="scanLine" hidden></div>
+            <button class="clear-button" id="clearButton" type="button" aria-label="Remove image" hidden>&times;</button>
+          </div>
+
+          <div class="capture-actions">
+            <label class="action-button primary-action" for="fileInput">
+              <span class="button-icon" aria-hidden="true">↑</span>
+              Upload photo
+            </label>
+            <input id="fileInput" type="file" accept="image/jpeg,image/png,image/webp" hidden>
+            <button class="action-button secondary-action" id="cameraButton" type="button">
+              <span class="button-icon" aria-hidden="true">◎</span>
+              Use camera
+            </button>
+          </div>
+          <p class="camera-hint" id="cameraHint">A well-lit, close-up image gives the clearest read.</p>
+        </div>
+
+        <aside class="result-panel panel" aria-live="polite">
+          <div class="panel-heading result-heading">
+            <div>
+              <span class="section-number">02</span>
+              <h2>Assessment</h2>
+            </div>
+            <span class="status-pill idle" id="statusPill">Waiting</span>
+          </div>
+
+          <div class="result-content" id="resultContent">
+            <div class="result-placeholder">
+              <div class="placeholder-ring"><span>?</span></div>
+              <h3>Your result will appear here</h3>
+              <p>Upload or capture an image, then run the inspection.</p>
+            </div>
+          </div>
+
+          <div class="inspection-controls">
+            <label class="field-label" for="functionId">Nyckel Function ID</label>
+            <input class="text-input" id="functionId" type="text" value="9d86fdhd4df2lxjq" placeholder="Paste your function ID" autocomplete="off">
+            <label class="field-label" for="proxyUrl">Backend endpoint</label>
+            <input class="text-input" id="proxyUrl" type="url" value="http://localhost:3000/api/classify" autocomplete="url">
+            <button class="inspect-button" id="inspectButton" type="button" disabled>
+              <span>Run inspection</span><span class="arrow" aria-hidden="true">↗</span>
+            </button>
+            <p class="control-note">Your secret stays on the server. The browser only sends this image and Function ID to your configured proxy.</p>
+          </div>
+        </aside>
+      </section>
+
+      <section class="trust-strip" aria-label="How this works">
+        <div><span class="trust-index">A</span><strong>Image first</strong><span>Nothing is analyzed until you choose to run it.</span></div>
+        <div><span class="trust-index">B</span><strong>Confidence-led</strong><span>Use the score as guidance, not a food safety guarantee.</span></div>
+        <div><span class="trust-index">C</span><strong>Private by design</strong><span>Credentials belong in your backend environment.</span></div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <span>FRESHCHECK / NYCKEL IMAGE CLASSIFICATION</span>
+      <span>Visual signals are not a substitute for food safety guidance.</span>
+    </footer>
+  </div>
+  <div class="toast" id="toast" role="alert" hidden></div>
+  <script src="app.js"></script>
+</body>
+</html>
